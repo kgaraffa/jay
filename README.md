@@ -4,7 +4,7 @@ from command line in download folder
 
 git init
 
-git clone
+git clone https://github.com/kgaraffa/jay.git
 
 cd SkiMap
 
