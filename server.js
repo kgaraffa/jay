@@ -57,7 +57,6 @@ function getJayInfo(cb) {
             if ($('.pti-closed')) {
              closedTrails = $('.pti-closed').parent().siblings();
             }
-            console.log($('.pti-closed').parent().siblings().text());
             if ($('.pti-closed')) {
               closedLift = $('.pti-closed').parent().parent().siblings();
             }
