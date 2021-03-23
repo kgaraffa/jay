@@ -124,7 +124,55 @@ void loop() {
             // data point for a lift
             if (dataCount == 87 || dataCount == 88 || dataCount == 89 || dataCount == 90 || dataCount == 91 || dataCount == 92 || dataCount == 93) {
               Serial.println("found a lift");
+              colorLift(green);
+            }
+            else {
+              strip.setPixelColor(pixelNum, green);
+              pixelNum++;
+            }
+          }
+          else if (buffer[j] == 50) {
+            Serial.println("groomed trail");
+            // data point for a lift
+            if (dataCount == 87 || dataCount == 88 || dataCount == 89 || dataCount == 90 || dataCount == 91 || dataCount == 92 || dataCount == 93) {
+              Serial.println("found a lift");
               colorLift(blue);
+            }
+            else {
+              strip.setPixelColor(pixelNum, blue);
+              pixelNum++;
+            }
+          }
+          else if (buffer[j] == 51) {
+            Serial.println("hold lift");
+            // data point for a lift
+            if (dataCount == 87 || dataCount == 88 || dataCount == 89 || dataCount == 90 || dataCount == 91 || dataCount == 92 || dataCount == 93) {
+              Serial.println("found a lift");
+              colorLift(yellow);
+            }
+            else {
+              strip.setPixelColor(pixelNum, yellow);
+              pixelNum++;
+            }
+          }
+          else if (buffer[j] == 52) {
+            Serial.println("closed lift");
+            // data point for a lift
+            if (dataCount == 87 || dataCount == 88 || dataCount == 89 || dataCount == 90 || dataCount == 91 || dataCount == 92 || dataCount == 93) {
+              Serial.println("found a lift");
+              colorLift(red);
+            }
+            else {
+              strip.setPixelColor(pixelNum, red);
+              pixelNum++;
+            }
+          }
+          else if (buffer[j] == 53) {
+            Serial.println("open lift");
+            // data point for a lift
+            if (dataCount == 87 || dataCount == 88 || dataCount == 89 || dataCount == 90 || dataCount == 91 || dataCount == 92 || dataCount == 93) {
+              Serial.println("found a lift");
+              colorLift(green);
             }
             else {
               strip.setPixelColor(pixelNum, green);
@@ -181,7 +229,7 @@ void colorLift(uint32_t color) {
     case 90:
       Serial.println("90th data pointl");
       for (pixelNum; pixelNum < 96; pixelNum++) {
-        strip.setPixelColor(pixelNum, red);
+        strip.setPixelColor(pixelNum, color);
       }
       break;
     case 91:
