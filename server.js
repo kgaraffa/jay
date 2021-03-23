@@ -12,16 +12,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/jay', (req, res) => {
-    getAbasinInfo((info) => {
+    getJayInfo((info) => {
         console.log(info);
         res.json(info);
     });
 })
 
 app.get('/status/jay', (req, res) => {
-    getAbasinInfo(({ openTrails, closedTrails }) => {
+    getJayInfo(({ openTrails, closedTrails, groomedTrails, holdLift, closedLift, openLift, openPartialTrails }) => {
         let map = new Map();
-        const orderedList = [];
+        const orderedList = ["Chalet Meadow","Deer Run","Grammy Jay","Harmony Lane","Interstate","Jug Handle","Kangaroo Trail","Lower Can Am","Perry Merril Ave","Progression Terrain","Queen's Highway","Rabbit Trail","Raccoon Run","Subway","The Boulevard","The Interstate","Ullr's Dream","Alligator Alley","Angel's Wiggle","Cat Walk","Green Mountain Boys","Heaven's Road","Hell's Crossing","Lower Exhibition","Lower Goat Run","Lower Milk Run","Lower River Quai","Lower U.N.","Micky","Mont L'Entrepide","Montrealer","Northway","Paradise Meadows","Poma Line","Purgatory","Racer","St. George's Prayer","Sweetheart","Taxi","The Flash","The Jet Lower","The Willard","Ullr's Dream","Upper Goat Run","Vermonter","Wedelmaster","601","Derick Hot Shot","Green Beret","Haynes","JFK","Kitzbuehel","Lift Line","Northwest Passage","The Jet","U.N.","Upper Can Am","Upper Exhibition","Upper Milk Run","Upper River Quai","Chalet Mini Park","Family Cross","Rabbit","TBL Area","Bushwacker","Doe Woods","Full Moon","Half Moon","Kokomo","Quarter Moon","Andre's Paradise","Beaver Pond","Bonaventure Glade","Buck Woods","Buckaroo Bonzai","Canyon Land","Deliverance","Expo Glade","Hell's Woods","Kitz Woods","North Glade","Show-Off Glade","Staircase","Stateside Glade","The Face Chutes","Timbuktu","Tuckerman's Chute","Valhalla","Vertigo", "Bonaventure Quad", "Flyer Quad", "Jet Triple", "Metro Quad", "Taxi Quad", "Village Double", "Aerial Tram"];
 
         mapOfTrails(openTrails, 1, map);
         mapOfTrails(closedTrails, 0, map);
@@ -29,6 +29,7 @@ app.get('/status/jay', (req, res) => {
         mapOfTrails(holdLift, 3, map);
         mapOfTrails(closedLift, 4, map);
         mapOfTrails(openLift, 5, map);
+        mapOfTrails(openPartialTrails, 6, map);
 
         console.log(map);
 
@@ -45,8 +46,8 @@ app.get('/status/jay', (req, res) => {
         return res.send(binaryArray.join(""));
     })
 })
-var openTrails, closedTrails;
-function getAbasinInfo(cb) {
+var openTrails, openPartialTrails, closedTrails, groomedTrails, holdLift, closedLift, openLift;
+function getJayInfo(cb) {
     request('https://digital.jaypeakresort.com/conditions/snow-report/snow-report/', function (error, response, html) {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
@@ -66,10 +67,14 @@ function getAbasinInfo(cb) {
             if ($('.pti-groomed')) {
               groomedTrails = $('.pti-groomed').parent().siblings();
             }
+            if ($('.pti-open-partial')) {
+              openPartialTrails = $('.pti-open-partial').parent().siblings();
+            }
             if ($('.pti-hold')) {
               holdLift = $('.pti-hold').parent().parent().siblings();
             }
             const openTrailsList = fromatJayInfo(openTrails);
+            const openPartialTrailsList = fromatJayInfo(openPartialTrails);
             const groomedTrailsList = fromatJayInfo(groomedTrails);
             const holdLiftList = fromatJayInfo(holdLift);
             const closedLiftList = fromatJayInfo(closedLift);
@@ -83,17 +88,18 @@ function getAbasinInfo(cb) {
                 groomedTrails: groomedTrailsList,
                 holdLift: holdLiftList,
                 closedLift: closedLiftList,
+                openPartialTrails: openPartialTrailsList,
                 openLift: openLiftList
             }
             return cb(trailInfo);
 
         }
-        throw Error("could not access a basin info at this time");    })
+        throw Error("could not access jay peak info at this time");    })
 }
 
 function fromatJayInfo(list) {
     trailsList = [];
-    const notIncluded = ['8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:00am - 4:00pm',  '8:00am - 4:00pm', '8:00am - 4:00pm', '8:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '10:00am - 4:00pm', '10:00am - 4:00pm', 'Tramside Carpet', 'Stateside Carpet']
+    const notIncluded = ['8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:00am - 4:00pm',  '8:00am - 4:00pm', '8:00am - 4:00pm', '8:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '10:00am - 4:00pm', '10:00am - 4:00pm', 'Tramside Carpet', 'Stateside Carpet']
     for (let i = 0; i < list.length; i++) {
         const trail = list[i];
         for (let j = 0; j < trail.children.length; j++) {

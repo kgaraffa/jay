@@ -34,9 +34,7 @@ Adafruit_NeoPixel strip(LEDCount, LEDPin, NEO_GRB + NEO_KHZ800);
 uint32_t red = strip.Color(127, 0, 0);
 uint32_t green = strip.Color(0, 127, 0);
 uint32_t blue = strip.Color(0, 0, 128);
-uint32_t purple = strip.Color(127, 0, 128);
-uint32_t white = strip.Color(1, 1, 1);
-uint32_t brown = strip.Color(1,255, 255);
+uint32_t orange = strip.Color(255, 165, 0);
 uint32_t yellow = strip.Color(255, 255, 0);
 
 //variables for parsing the API response and handling which LEDs to light up
@@ -143,6 +141,18 @@ void loop() {
               pixelNum++;
             }
           }
+          else if (buffer[j] == 54) {
+            Serial.println("partial open trail");
+            // data point for a lift
+            if (dataCount == 87 || dataCount == 88 || dataCount == 89 || dataCount == 90 || dataCount == 91 || dataCount == 92 || dataCount == 93) {
+              Serial.println("found a lift");
+              colorLift(orange);
+            }
+            else {
+              strip.setPixelColor(pixelNum, orange);
+              pixelNum++;
+            }
+          }
           else if (buffer[j] == 52) {
             Serial.println("closed lift");
             // data point for a lift
@@ -208,45 +218,45 @@ void loop() {
 
 void colorLift(uint32_t color) {
   switch (dataCount) {
-    case 87:
-      Serial.println("87th data point");
-      for (pixelNum; pixelNum < 89; pixelNum++) {
-        strip.setPixelColor(pixelNum, color);
-      }
-      break;
-    case 88:
-      Serial.println("88th data point");
+    case 89:
+      Serial.println("89th data point");
       for (pixelNum; pixelNum < 91; pixelNum++) {
         strip.setPixelColor(pixelNum, color);
       }
       break;
-    case 89:
-      Serial.println("89th data point");
-      for (pixelNum; pixelNum < 93; pixelNum++) {
-        strip.setPixelColor(pixelNum, color);
-      }
-      break;
     case 90:
-      Serial.println("90th data pointl");
-      for (pixelNum; pixelNum < 95; pixelNum++) {
+      Serial.println("90th data point");
+      for (pixelNum; pixelNum < 93; pixelNum++) {
         strip.setPixelColor(pixelNum, color);
       }
       break;
     case 91:
       Serial.println("91st data point");
-      for (pixelNum; pixelNum < 97; pixelNum++) {
+      for (pixelNum; pixelNum < 95; pixelNum++) {
         strip.setPixelColor(pixelNum, color);
       }
       break;
     case 92:
-      Serial.println("92nd data point");
-      for (pixelNum; pixelNum < 99; pixelNum++) {
+      Serial.println("92nd data pointl");
+      for (pixelNum; pixelNum < 97; pixelNum++) {
         strip.setPixelColor(pixelNum, color);
       }
       break;
     case 93:
       Serial.println("93rd data point");
+      for (pixelNum; pixelNum < 99; pixelNum++) {
+        strip.setPixelColor(pixelNum, color);
+      }
+      break;
+    case 94:
+      Serial.println("94th data point");
       for (pixelNum; pixelNum < 101; pixelNum++) {
+        strip.setPixelColor(pixelNum, color);
+      }
+      break;
+    case 95:
+      Serial.println("95th data point");
+      for (pixelNum; pixelNum < 103; pixelNum++) {
         strip.setPixelColor(pixelNum, color);
       }
       break;
