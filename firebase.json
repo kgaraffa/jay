@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "frontend",
+    "public": "public",
     "rewrites": [
       {
         "source": "/jay-status",

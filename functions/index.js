@@ -14,25 +14,25 @@ function getJayInfo(cb) {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
             if ($('.pti-open')) {
-             openTrails = $('.pti-open').parent().siblings();
+                openTrails = $('.pti-open').parent().siblings();
             }
             if ($('.pti-closed')) {
-             closedTrails = $('.pti-closed').parent().siblings();
+                closedTrails = $('.pti-closed').parent().siblings();
             }
             if ($('.pti-closed')) {
-              closedLift = $('.pti-closed').parent().parent().siblings();
+                closedLift = $('.pti-closed').parent().parent().siblings();
             }
             if ($('.pti-open')) {
                 openLift = $('.pti-open').parent().parent().siblings();
-              }
+            }
             if ($('.pti-groomed')) {
-              groomedTrails = $('.pti-groomed').parent().siblings();
+                groomedTrails = $('.pti-groomed').parent().siblings();
             }
             if ($('.pti-open-partial')) {
-              openPartialTrails = $('.pti-open-partial').parent().siblings();
+                openPartialTrails = $('.pti-open-partial').parent().siblings();
             }
             if ($('.pti-hold')) {
-              holdLift = $('.pti-hold').parent().parent().siblings();
+                holdLift = $('.pti-hold').parent().parent().siblings();
             }
             const openTrailsList = formatJayInfo(openTrails);
             const openPartialTrailsList = formatJayInfo(openPartialTrails);
@@ -55,12 +55,13 @@ function getJayInfo(cb) {
             return cb(trailInfo);
 
         }
-        throw Error("could not access jay peak info at this time");    })
+        throw Error("could not access jay peak info at this time");
+    })
 }
 
 function formatJayInfo(list) {
     trailsList = [];
-    const notIncluded = ['8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:00am - 4:00pm',  '8:00am - 4:00pm', '8:00am - 4:00pm', '8:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '10:00am - 4:00pm', '10:00am - 4:00pm', 'Tramside Carpet', 'Stateside Carpet']
+    const notIncluded = ['8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:30am - 4:00pm', '8:00am - 4:00pm', '8:00am - 4:00pm', '8:00am - 4:00pm', '8:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '9:00am - 4:00pm', '10:00am - 4:00pm', '10:00am - 4:00pm', 'Tramside Carpet', 'Stateside Carpet']
     for (let i = 0; i < list.length; i++) {
         const trail = list[i];
         for (let j = 0; j < trail.children.length; j++) {
@@ -92,7 +93,7 @@ jayStatusApp.get('/jay-status', (req, res) => {
 jayStatusIno.get('/jay-ino', (req, res) => {
     getJayInfo(({ openTrails, closedTrails, groomedTrails, holdLift, closedLift, openLift, openPartialTrails }) => {
         let map = new Map();
-        const orderedList = ["Chalet Meadow","Deer Run","Grammy Jay","Harmony Lane","Interstate","Kangaroo Trail","Lower Can Am","Perry Merril Ave","Progression Terrain","Queen's Highway","Rabbit Trail","Raccoon Run","Subway","The Boulevard","The Interstate","Ullr's Dream","Alligator Alley","Angel's Wiggle","Cat Walk","Green Mountain Boys","Heaven's Road","Hell's Crossing","Lower Exhibition","Lower Goat Run","Lower Milk Run","Lower River Quai","Lower U.N.","Micky","Mont L'Entrepide","Montrealer","Northway","Paradise Meadows","Poma Line","Purgatory","Racer","St. George's Prayer","Sweetheart","Taxi","The Flash","The Jet Lower","The Willard","Ullr's Dream","Upper Goat Run","Vermonter","Wedelmaster","601","Hotshot Derick","Green Beret","Haynes","JFK","Kitzbuehel","Lift Line","Northwest Passage","The Jet","U.N.","Upper Can Am","Upper Exhibition","Upper Milk Run","Upper River Quai","Bushwacker","Doe Woods","Full Moon","Half Moon","Kokomo","Quarter Moon","Andre's Paradise","Beaver Pond","Bonaventure Glade","Buck Woods","Buckaroo Bonzai","Canyon Land","Deliverance","Expo Glade","Hell's Woods","Kitz Woods","North Glade","Show-Off Glade","Staircase","Stateside Glade","The Face Chutes","Timbuktu","Tuckerman's Chute","Valhalla","Vertigo", "Bonaventure Quad", "Flyer Quad", "Jet Triple", "Metro Quad", "Taxi Quad", "Village Double", "Aerial Tram"];
+        const orderedList = ["Chalet Meadow", "Deer Run", "Grammy Jay", "Harmony Lane", "Interstate", "Kangaroo Trail", "Lower Can Am", "Perry Merril Ave", "Progression Terrain", "Queen's Highway", "Rabbit Trail", "Raccoon Run", "Subway", "The Boulevard", "The Interstate", "Ullr's Dream", "Alligator Alley", "Angel's Wiggle", "Cat Walk", "Green Mountain Boys", "Heaven's Road", "Hell's Crossing", "Lower Exhibition", "Lower Goat Run", "Lower Milk Run", "Lower River Quai", "Lower U.N.", "Micky", "Mont L'Entrepide", "Montrealer", "Northway", "Paradise Meadows", "Poma Line", "Purgatory", "Racer", "St. George's Prayer", "Sweetheart", "Taxi", "The Flash", "The Jet Lower", "The Willard", "Ullr's Dream", "Upper Goat Run", "Vermonter", "Wedelmaster", "601", "Hotshot Derick", "Green Beret", "Haynes", "JFK", "Kitzbuehel", "Lift Line", "Northwest Passage", "The Jet", "U.N.", "Upper Can Am", "Upper Exhibition", "Upper Milk Run", "Upper River Quai", "Bushwacker", "Doe Woods", "Full Moon", "Half Moon", "Kokomo", "Quarter Moon", "Andre's Paradise", "Beaver Pond", "Bonaventure Glade", "Buck Woods", "Buckaroo Bonzai", "Canyon Land", "Deliverance", "Expo Glade", "Hell's Woods", "Kitz Woods", "North Glade", "Show-Off Glade", "Staircase", "Stateside Glade", "The Face Chutes", "Timbuktu", "Tuckerman's Chute", "Valhalla", "Vertigo", "Bonaventure Quad", "Flyer Quad", "Jet Triple", "Metro Quad", "Taxi Quad", "Village Double", "Aerial Tram"];
 
         mapOfTrails(openTrails, 1, map);
         mapOfTrails(closedTrails, 0, map);
@@ -104,7 +105,6 @@ jayStatusIno.get('/jay-ino', (req, res) => {
 
         let binaryArray = [];
         // a character at the beginning of the data to signify that the rest of the data is the ordered binary string
-        binaryArray.push(String.fromCharCode(2));
         for (let i = 0; i < orderedList.length; i++) {
             let bit = map.get(orderedList[i]);
             if (bit === undefined) {

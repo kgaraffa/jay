@@ -68,7 +68,7 @@
             $("#hold-list").empty();
             $("#open-lift").empty();
             $("#closed-lift").empty();
-            jQuery.get('/jay', function(data, status){
+            jQuery.get('/jay-status', function(data, status){
                 if(status === "success"){
                     const {openTrails, closedTrails, groomedTrails, holdLift, openLift, closedLift} = data;
                     for(let i = 0; i < openTrails.length; i++){
