@@ -13,26 +13,26 @@ function getJayInfo(cb) {
     request('https://digital.jaypeakresort.com/conditions/snow-report/snow-report/', function (error, response, html) {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
-            if ($('.pti-open')) {
-                openTrails = $('.pti-open').parent().siblings();
+            if ($('.SnowReport-Trail .pti-open')) {
+                openTrails = $('.SnowReport-Trail .pti-open').parent().siblings();
             }
-            if ($('.pti-closed')) {
-                closedTrails = $('.pti-closed').parent().siblings();
+            if ($('.SnowReport-Trail .pti-closed')) {
+                closedTrails = $('.SnowReport-Trail .pti-closed').parent().siblings();
             }
-            if ($('.pti-closed')) {
-                closedLift = $('.pti-closed').parent().parent().siblings();
+            if ($('.SnowReport-Lift .pti-closed')) {
+                closedLift = $('.SnowReport-Lift .pti-closed').parent().parent().siblings();
             }
-            if ($('.pti-open')) {
-                openLift = $('.pti-open').parent().parent().siblings();
+            if ($('.SnowReport-Lift .pti-open')) {
+                openLift = $('.SnowReport-Lift .pti-open').parent().parent().siblings();
             }
-            if ($('.pti-groomed')) {
-                groomedTrails = $('.pti-groomed').parent().siblings();
+            if ($('.SnowReport-Trail .pti-groomed')) {
+                groomedTrails = $('.SnowReport-Trail .pti-groomed').parent().siblings();
             }
-            if ($('.pti-open-partial')) {
-                openPartialTrails = $('.pti-open-partial').parent().siblings();
+            if ($('.SnowReport-Trail .pti-open-partial')) {
+                openPartialTrails = $('.SnowReport-Trail .pti-open-partial').parent().siblings();
             }
-            if ($('.pti-hold')) {
-                holdLift = $('.pti-hold').parent().parent().siblings();
+            if ($('.SnowReport-Lift .pti-hold')) {
+                holdLift = $('.SnowReport-Lift .pti-hold').parent().parent().siblings();
             }
             const openTrailsList = formatJayInfo(openTrails);
             const openPartialTrailsList = formatJayInfo(openPartialTrails);
