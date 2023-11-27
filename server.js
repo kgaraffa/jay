@@ -31,8 +31,6 @@ app.get('/status/jay', (req, res) => {
         mapOfTrails(openLift, 5, map);
         mapOfTrails(openPartialTrails, 6, map);
 
-        console.log(map);
-
         let binaryArray = [];
         // a character at the beginning of the data to signify that the rest of the data is the ordered binary string
         binaryArray.push(String.fromCharCode(2));
