@@ -94,7 +94,7 @@ jayStatusApp.get('/jay-status', (req, res) => {
 jayDate.get('/jay-date', (req, res) => {
     const currentUnixTime = Math.floor(Date.now() / 1000);
 
-    res.send(currentUnixTime);
+    res.send(currentUnixTime.toString());
 });
 
 jayStatusIno.get('/jay-ino', (req, res) => {
