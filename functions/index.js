@@ -117,36 +117,6 @@ jayStatusIno.get('/jay-ino', (req, res) => {
             let bit = map.get(orderedList[i]);
             if (bit === undefined) {
                 console.log(`${orderedList[i]} cannot be found in scraped data and returned a value of ${bit}`);
-            }
-            if (i === orderedList.length - 1) { // tram
-                for (let i = 0; i < 10; i++) {
-                    binaryArray.push(bit);
-                }
-            } else if (i === orderedList.length - 2) { // village double
-                for (let i = 0; i < 4; i++) {
-                    binaryArray.push(bit);
-                }
-            } else if (i === orderedList.length - 3) { // taxi quad
-                for (let i = 0; i < 4; i++) {
-                    binaryArray.push(bit);
-                }
-            } else if (i === orderedList.length - 4) { // metro quad
-                for (let i = 0; i < 6; i++) {
-                    binaryArray.push(bit);
-                }
-
-            } else if (i === orderedList.length - 5) { // jet triple
-                for (let i = 0; i < 6; i++) {
-                    binaryArray.push(bit);
-                }
-            } else if (i === orderedList.length - 6) { // flyer quad
-                for (let i = 0; i < 8; i++) {
-                    binaryArray.push(bit);
-                }
-            } else if (i === orderedList.length - 7) { // bonnie quad
-                for (let i = 0; i < 8; i++) {
-                    binaryArray.push(bit);
-                }
             } else {
                 binaryArray.push(bit);
             }
