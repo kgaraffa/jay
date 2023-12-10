@@ -4,6 +4,7 @@ const functions = require('firebase-functions');
 const express = require('express');
 const jayStatusApp = express();
 const jayStatusIno = express();
+const jayDate = express();
 const request = require('request');
 const cheerio = require('cheerio');
 
@@ -90,6 +91,13 @@ jayStatusApp.get('/jay-status', (req, res) => {
     });
 });
 
+jayDate.get('/jay-date', (req, res) => {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString();
+
+    res.send(formattedDate);
+});
+
 jayStatusIno.get('/jay-ino', (req, res) => {
     getJayInfo(({ openTrails, closedTrails, groomedTrails, holdLift, closedLift, openLift, openPartialTrails }) => {
         let map = new Map();
@@ -150,3 +158,4 @@ jayStatusIno.get('/jay-ino', (req, res) => {
 
 exports.jayStatusApp = functions.https.onRequest(jayStatusApp);
 exports.jayStatusIno = functions.https.onRequest(jayStatusIno);
+exports.jayDate = functions.https.onRequest(jayDate);

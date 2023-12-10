@@ -9,6 +9,10 @@
       {
         "source": "/jay-ino",
         "function": "jayStatusIno"
+      },
+      {
+        "source": "/jay-date",
+        "function": "jayDate"
       }
     ],
     "ignore": [
