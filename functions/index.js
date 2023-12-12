@@ -101,7 +101,8 @@ jayStatusIno.get('/jay-ino', (req, res) => {
     getJayInfo(({ openTrails, closedTrails, groomedTrails, holdLift, closedLift, openLift, openPartialTrails }) => {
         let map = new Map();
         const orderedList = ["Timbuktu", "Hotshot Derick", "Haynes", "U.N.", "The Jet", "Kitzbuehel", "Montrealer", "Kitz Woods", "Vermonter", "Northway", "Hell's Woods", "Hell's Crossing", "Angel's Wiggle", "Paradise Meadows", "Valhalla", "Upper Milk Run", "Canyon Land", "Taxi", "Lower Milk Run","Micky", "Bonaventure Glade", "Show-Off Glade", "601", "Lift Line", "Green Beret", "St. George's Prayer", "Deliverance", "Vertigo", "Upper Can Am", "Buckaroo Bonzai", "Doe Woods", "Buck Woods", "Quarter Moon", "Half Moon", "Full Moon", "Grammy Jay", "Raccoon Run", "Queen's Highway", "Interstate", "Upper Goat Run", "Lower River Quai", "Upper River Quai", "The Face Chutes", "Tuckerman's Chute", "Poma Line", "Ullr's Dream", "Wedelmaster", "JFK", "Alligator Alley", "Staircase", "Everglade", "Northwest Passage", "Upper Exhibition", "Racer", "Expo Glade", "Green Mountain Boys",
-        "North Glade", "Deer Run", "Harmony Lane", "Subway","Bushwacker", "Kokomo", "Beaver Pond",  "Andre's Paradise", "Bonaventure Quad", "Flyer Quad", "Jet Triple", "Metro Quad", "Taxi Quad", "Village Double", "Aerial Tram"];
+        "North Glade", "Deer Run", "Harmony Lane", "Subway","Bushwacker", "Kokomo", "Beaver Pond",  "Andre's Paradise", 
+        "Flyer Quad", "Metro Quad", "Aerial Tram", "Village Double", "Taxi Quad", "Bonaventure Quad", "Jet Triple"];
 
         mapOfTrails(openTrails, 1, map);
         mapOfTrails(closedTrails, 0, map);
