@@ -145,7 +145,7 @@ void controlNeoPixel(String payload) {
       switch (dataPoint) {
         case 3: // Open
           for (j = 0; j < flyer; j++) { 
-            setPixelColor(x + j, 255, 255, 0); // Yellow
+            blinkChairliftPixelColor(x + j, 255, 255, 0, j * 1000, flyer * 1000, 0);
           }
           break;
         case 4: // Closed
@@ -164,8 +164,8 @@ void controlNeoPixel(String payload) {
     } else if (i == 65) { // metro
       switch (dataPoint) {
         case 3: // Open
-          for (j = 0; j < metro; j++) { 
-            setPixelColor(x + flyer + j, 255, 255, 0); // Yellow
+          for (j = 0; j < metro; j++) {
+            blinkChairliftPixelColor(x + flyer + j, 255, 255, 0, j * 1000, metro * 1000, 0);
           }
           break;
         case 4: // Closed
@@ -184,8 +184,8 @@ void controlNeoPixel(String payload) {
     } else if (i == 66) { // tram
       switch (dataPoint) {
         case 3: // Open
-          for (j = 0; j < tram; j++) { 
-            setPixelColor(x + flyer + metro + j, 255, 255, 0); // Yellow
+          for (j = 0; j < tram; j++) {
+            blinkChairliftPixelColor(x + flyer + metro + j, 255, 255, 0, j * 1000, tram * 1000, 0);
           }
           break;
         case 4: // Closed
@@ -205,6 +205,7 @@ void controlNeoPixel(String payload) {
       switch (dataPoint) {
         case 3: // Open
           for (j = 0; j < village; j++) { 
+            blinkChairliftPixelColor(x + flyer + metro + tram + j, 255, 255, 0, j * 1000, village * 1000, 0);
             setPixelColor(x + flyer + metro + tram + j, 255, 255, 0); // Yellow
           }
           break;
@@ -225,7 +226,7 @@ void controlNeoPixel(String payload) {
       switch (dataPoint) {
         case 3: // Open
           for (j = 0; j < taxi; j++) { 
-            setPixelColor(x + flyer + metro + tram + village + j, 255, 255, 0); // Yellow
+            blinkChairliftPixelColor(x + flyer + metro + tram + village + j, 255, 255, 0, j * 1000, taxi * 1000, 0);
           }
           break;
         case 4: // Closed
@@ -245,7 +246,7 @@ void controlNeoPixel(String payload) {
       switch (dataPoint) {
         case 3: // Open
           for (j = 0; j < bonnie; j++) { 
-            setPixelColor(x + flyer + metro + tram + village + taxi + j, 255, 255, 0); // Yellow
+            blinkChairliftPixelColor(x + flyer + metro + tram + village + taxi + j, 255, 255, 0, j * 1000, bonnie * 1000, 0);
           }
           break;
         case 4: // Closed
@@ -265,7 +266,7 @@ void controlNeoPixel(String payload) {
       switch (dataPoint) {
         case 3: // Open
           for (j = 0; j < jet; j++) { 
-            setPixelColor(x + flyer + metro + tram + village + taxi + bonnie + j, 255, 255, 0); // Yellow
+            blinkChairliftPixelColor(x + flyer + metro + tram + village + taxi + bonnie + j, 255, 255, 0, j * 1000, jet * 1000, 0);
           }
           break;
         case 4: // Closed
@@ -334,4 +335,43 @@ void blinkPixelColor(int index, uint8_t r, uint8_t g, uint8_t b, unsigned long i
     // If not blinking, turn off the LED
     setPixelColor(index, 0, 0, 0);
   }
+}
+
+void blinkChairliftPixelColor(int index, uint8_t r, uint8_t g, uint8_t b, unsigned long delayBeforeBlink, unsigned long intervalBetweenBlinks, int flagIndex) {
+  static unsigned long *previousMillisBlink = nullptr;
+  static unsigned long *startMillisDelay = nullptr;
+
+  if (!previousMillisBlink) {
+    previousMillisBlink = new unsigned long[LED_COUNT];
+    memset(previousMillisBlink, 0, sizeof(unsigned long) * LED_COUNT);
+  }
+
+  if (!startMillisDelay) {
+    startMillisDelay = new unsigned long[LED_COUNT];
+    memset(startMillisDelay, 0, sizeof(unsigned long) * LED_COUNT);
+  }
+
+  unsigned long currentMillis = millis();
+  if (startMillisDelay[index] == 0) {
+    // First time, initialize the delay start time
+    startMillisDelay[index] = currentMillis;
+  }
+
+  if (currentMillis - startMillisDelay[index] >= delayBeforeBlink) {
+    if (currentMillis - previousMillisBlink[index] >= intervalBetweenBlinks) {
+      previousMillisBlink[index] = currentMillis;
+
+      if (alternateColorFlags[index][flagIndex]) {
+        setPixelColor(index, 0, 0, 0); // Turn off
+      } else {
+        setPixelColor(index, r, g, b); // Turn on
+      }
+
+      alternateColorFlags[index][flagIndex] = !alternateColorFlags[index][flagIndex];
+    }
+  } else {
+    // Before the first blink, turn off the LED
+    setPixelColor(index, 0, 0, 0);
+  }
+
 }
