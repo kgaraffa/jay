@@ -143,9 +143,9 @@ void controlNeoPixel(String payload) {
 
     if (i == 64) { // flyer
       switch (dataPoint) {
-        case 3: // Open
+        case 3: // On Hold
           for (j = 0; j < flyer; j++) { 
-            blinkChairliftPixelColor(x + j, 255, 255, 0, j * 1000, flyer * 1000, 0, dataPoint);
+            setPixelColor(x + j, 255, 255, 0);// Yellow
           }
           break;
         case 4: // Closed
@@ -153,9 +153,9 @@ void controlNeoPixel(String payload) {
             setPixelColor(x + j, 255, 0, 0); // Red
           }
           break;
-        case 5: // On Hold
+        case 5: // Open
           for (j = 0; j < flyer; j++) { 
-            setPixelColor(x + j, 0, 0, 255); // Blue
+            blinkChairliftPixelColor(x + j, 0, 0, 255, j * 1000, flyer * 1000, 0, dataPoint);
           }
           break;
         default:
@@ -163,9 +163,9 @@ void controlNeoPixel(String payload) {
       }
     } else if (i == 65) { // metro
       switch (dataPoint) {
-        case 3: // Open
+        case 3: // On Hold
           for (j = 0; j < metro; j++) {
-            blinkChairliftPixelColor(x + flyer + j, 255, 255, 0, j * 1000, metro * 1000, 0, dataPoint);
+            setPixelColor(x + flyer + j, 255, 255, 0);// Yellow
           }
           break;
         case 4: // Closed
@@ -173,9 +173,9 @@ void controlNeoPixel(String payload) {
             setPixelColor(x + flyer + j, 255, 0, 0); // Red
           }
           break;
-        case 5: // On Hold
+        case 5: // Open
           for (j = 0; j < metro; j++) { 
-            setPixelColor(x + flyer + j, 0, 0, 255); // Blue
+            blinkChairliftPixelColor(x + flyer + j, 0, 0, 255, j * 1000, metro * 1000, 0, dataPoint);
           }
           break;
         default:
@@ -183,9 +183,9 @@ void controlNeoPixel(String payload) {
       }
     } else if (i == 66) { // tram
       switch (dataPoint) {
-        case 3: // Open
+        case 3: // On Hold
           for (j = 0; j < tram; j++) {
-            blinkChairliftPixelColor(x + flyer + metro + j, 255, 255, 0, j * 1000, tram * 1000, 0, dataPoint);
+            setPixelColor(x + flyer + metro + j, 255, 255, 0);// Yellow
           }
           break;
         case 4: // Closed
@@ -193,9 +193,9 @@ void controlNeoPixel(String payload) {
             setPixelColor(x + flyer + metro + j, 255, 0, 0); // Red
           }
           break;
-        case 5: // On Hold
+        case 5: // Open
           for (j = 0; j < tram; j++) { 
-            setPixelColor(x + flyer + metro + j, 0, 0, 255); // Blue
+            blinkChairliftPixelColor(x + flyer + metro + j, 0, 0, 255, j * 1000, tram * 1000, 0, dataPoint);
           }
           break;
         default:
@@ -203,9 +203,8 @@ void controlNeoPixel(String payload) {
       }
     } else if (i == 67) { // village
       switch (dataPoint) {
-        case 3: // Open
+        case 3: // On Hold
           for (j = 0; j < village; j++) { 
-            blinkChairliftPixelColor(x + flyer + metro + tram + j, 255, 255, 0, j * 1000, village * 1000, 0, dataPoint);
             setPixelColor(x + flyer + metro + tram + j, 255, 255, 0); // Yellow
           }
           break;
@@ -214,9 +213,9 @@ void controlNeoPixel(String payload) {
             setPixelColor(x + flyer + metro + tram + j, 255, 0, 0); // Red
           }
           break;
-        case 5: // On Hold
+        case 5: // Open
           for (j = 0; j < village; j++) { 
-            setPixelColor(x + flyer + metro + tram + j, 0, 0, 255); // Blue
+            blinkChairliftPixelColor(x + flyer + metro + tram + j, 0, 0, 255, j * 1000, village * 1000, 0, dataPoint);
           }
           break;
         default:
@@ -224,9 +223,9 @@ void controlNeoPixel(String payload) {
       }
     } else if (i == 68) { // taxi
       switch (dataPoint) {
-        case 3: // Open
+        case 3: // On Hold
           for (j = 0; j < taxi; j++) { 
-            blinkChairliftPixelColor(x + flyer + metro + tram + village + j, 255, 255, 0, j * 1000, taxi * 1000, 0, dataPoint);
+            setPixelColor(x + flyer + metro + tram + village + j, 255, 255, 0);// Yellow
           }
           break;
         case 4: // Closed
@@ -234,9 +233,9 @@ void controlNeoPixel(String payload) {
             setPixelColor(x + flyer + metro + tram + village + j, 255, 0, 0); // Red
           }
           break;
-        case 5: // On Hold
-          for (j = 0; j < taxi; j++) { 
-            setPixelColor(x + flyer + metro + tram + village + j, 0, 0, 255); // Blue
+        case 5: // Open
+          for (j = 0; j < taxi; j++) {
+            blinkChairliftPixelColor(x + flyer + metro + tram + village + j, 0, 0, 255, j * 1000, taxi * 1000, 0, dataPoint);
           }
           break;
         default:
@@ -244,9 +243,9 @@ void controlNeoPixel(String payload) {
       }
     } else if (i == 69) { // bonnie
       switch (dataPoint) {
-        case 3: // Open
+        case 3: // On Hold
           for (j = 0; j < bonnie; j++) { 
-            blinkChairliftPixelColor(x + flyer + metro + tram + village + taxi + j, 255, 255, 0, j * 1000, bonnie * 1000, 0, dataPoint);
+            setPixelColor(x + flyer + metro + tram + village + taxi + j, 255, 255, 0);// Yellow
           }
           break;
         case 4: // Closed
@@ -254,9 +253,9 @@ void controlNeoPixel(String payload) {
             setPixelColor(x + flyer + metro + tram + village + taxi + j, 255, 0, 0); // Red
           }
           break;
-        case 5: // On Hold
+        case 5: // Open
           for (j = 0; j < bonnie; j++) { 
-            setPixelColor(x + flyer + metro + tram + village + taxi + j, 0, 0, 255); // Blue
+            blinkChairliftPixelColor(x + flyer + metro + tram + village + taxi + j, 0, 0, 255, j * 1000, bonnie * 1000, 0, dataPoint);
           }
           break;
         default:
@@ -264,9 +263,9 @@ void controlNeoPixel(String payload) {
       }
     } else if (i == 70) { // jet
       switch (dataPoint) {
-        case 3: // Open
+        case 3: // On Hold
           for (j = 0; j < jet; j++) { 
-            blinkChairliftPixelColor(x + flyer + metro + tram + village + taxi + bonnie + j, 255, 255, 0, j * 1000, jet * 1000, 0, dataPoint);
+            setPixelColor(x + flyer + metro + tram + village + taxi + bonnie + j, 255, 255, 0);// Yellow
           }
           break;
         case 4: // Closed
@@ -274,9 +273,9 @@ void controlNeoPixel(String payload) {
             setPixelColor(x + flyer + metro + tram + village + taxi + bonnie + j, 255, 0, 0); // Red
           }
           break;
-        case 5: // On Hold
+        case 5: // Open
           for (j = 0; j < jet; j++) { 
-            setPixelColor(x + flyer + metro + tram + village + taxi + bonnie + j, 0, 0, 255); // Blue
+            blinkChairliftPixelColor(x + flyer + metro + tram + village + taxi + bonnie + j, 0, 0, 255, j * 1000, jet * 1000, 0, dataPoint);
           }
           break;
         default:
@@ -354,7 +353,7 @@ void blinkChairliftPixelColor(int index, uint8_t r, uint8_t g, uint8_t b, unsign
 
   unsigned long currentMillis = millis();
 
-  if (blinkValue == 3) {
+  if (blinkValue == 5) {
     if (startMillisDelay[index] == 0) {
       // First time, initialize the delay start time
       startMillisDelay[index] = currentMillis;
