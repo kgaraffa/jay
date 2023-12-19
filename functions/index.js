@@ -8,57 +8,35 @@ const jayDate = express();
 const request = require('request');
 const cheerio = require('cheerio');
 
-var openTrails, openPartialTrails, closedTrails, groomedTrails, holdLift, closedLift, openLift;
-
 function getJayInfo(cb) {
     request('https://digital.jaypeakresort.com/conditions/snow-report/snow-report/', function (error, response, html) {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
-            if ($('.SnowReport-Trail .pti-open')) {
-                openTrails = $('.SnowReport-Trail .pti-open').parent().siblings();
-            }
-            if ($('.SnowReport-Trail .pti-closed')) {
-                closedTrails = $('.SnowReport-Trail .pti-closed').parent().siblings();
-            }
-            if ($('.SnowReport-Lift .pti-closed')) {
-                closedLift = $('.SnowReport-Lift .pti-closed').parent().parent().siblings();
-            }
-            if ($('.SnowReport-Lift .pti-open')) {
-                openLift = $('.SnowReport-Lift .pti-open').parent().parent().siblings();
-            }
-            if ($('.SnowReport-Trail .pti-groomed')) {
-                groomedTrails = $('.SnowReport-Trail .pti-groomed').parent().siblings();
-            }
-            if ($('.SnowReport-Trail .pti-open-partial')) {
-                openPartialTrails = $('.SnowReport-Trail .pti-open-partial').parent().siblings();
-            }
-            if ($('.SnowReport-Lift .pti-hold')) {
-                holdLift = $('.SnowReport-Lift .pti-hold').parent().parent().siblings();
-            }
-            const openTrailsList = formatJayInfo(openTrails);
-            const openPartialTrailsList = formatJayInfo(openPartialTrails);
-            const groomedTrailsList = formatJayInfo(groomedTrails);
-            const holdLiftList = formatJayInfo(holdLift);
-            const closedLiftList = formatJayInfo(closedLift);
-            const openLiftList = formatJayInfo(openLift);
-            const closedTrailsList = formatJayInfo(closedTrails);
 
+            const holdLift = $('.SnowReport-Lift .pti-hold').parent().parent().siblings();
+            const openTrails = $('.SnowReport-Trail .pti-open').parent().siblings();
+            const closedTrails = $('.SnowReport-Trail .pti-closed').parent().siblings();
+            const closedLift = $('.SnowReport-Lift .pti-closed').parent().parent().siblings();
+            const openLift = $('.SnowReport-Lift .pti-open').parent().parent().siblings();
+            const groomedTrails = $('.SnowReport-Trail .pti-groomed').parent().siblings();
+            const openPartialTrails = $('.SnowReport-Trail .pti-open-partial').parent().siblings();
 
+            // Rest of your code
             const trailInfo = {
-                openTrails: openTrailsList,
-                closedTrails: closedTrailsList,
-                groomedTrails: groomedTrailsList,
-                holdLift: holdLiftList,
-                closedLift: closedLiftList,
-                openPartialTrails: openPartialTrailsList,
-                openLift: openLiftList
-            }
+                openTrails: formatJayInfo(openTrails),
+                closedTrails: formatJayInfo(closedTrails),
+                groomedTrails: formatJayInfo(groomedTrails),
+                holdLift: formatJayInfo(holdLift),
+                closedLift: formatJayInfo(closedLift),
+                openPartialTrails: formatJayInfo(openPartialTrails),
+                openLift: formatJayInfo(openLift)
+            };
             return cb(trailInfo);
-
         }
         throw Error("could not access jay peak info at this time");
-    })
+    });
 }
+
 
 function formatJayInfo(list) {
     trailsList = [];
@@ -107,8 +85,8 @@ jayStatusIno.get('/jay-ino', (req, res) => {
         mapOfTrails(openTrails, 1, map);
         mapOfTrails(closedTrails, 0, map);
         mapOfTrails(groomedTrails, 2, map);
-        mapOfTrails(holdLift, 3, map);
         mapOfTrails(closedLift, 4, map);
+        mapOfTrails(holdLift, 3, map);
         mapOfTrails(openLift, 5, map);
         mapOfTrails(openPartialTrails, 6, map);
 
