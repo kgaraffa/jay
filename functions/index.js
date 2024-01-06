@@ -90,7 +90,7 @@ jayStatusIno.get('/jay-ino', (req, res) => {
             "Tuckerman's Chute", "Poma Line", "Wedelmaster", "Alligator Alley",
             "Upper Goat Run", "Everglade", "Staircase", "JFK", "Ullr's Dream",
             "Beaver Pond", "Andre's Paradise", "Kokomo", "Northwest Passage", "North Glade",
-            "Green Mountain Boys", "Upper Exhibition", "Expo Glade", "Racer", "Subway",
+            "Green Mountain Boys", "Upper Exhibition", "Expo Glade", "Racer",
             "Deer Run", "Bushwacker", "Harmony Lane", "Flyer Quad", "Metro Quad", "Aerial Tram",
             "Village Double", "Taxi Quad", "Bonaventure Quad", "Jet Triple"];
 
