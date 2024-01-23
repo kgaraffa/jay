@@ -85,11 +85,11 @@ jayStatusIno.get('/jay-ino', (req, res) => {
             "Grammy Jay", "Raccoon Run", "Queen's Highway", "Half Moon", "Interstate",
             "Full Moon", "Quarter Moon", "Buck Woods", "Buckaroo Bonzai", "Lower River Quai",
             "Upper River Quai", "Vertigo", "Upper Can Am", "Lift Line", "Micky", "Taxi",
-            "601", "Deliverance", "Canyon Land", "Upper Milk Run", "Northway", "Valhalla",
+            "601", "Deliverance", "Canyon Land", "Upper Milk Run", "Upper Northway", "Valhalla",
             "Green Beret", "Vermonter", "St. George's Prayer", "The Face Chutes",
             "Tuckerman's Chute", "Poma Line", "Wedelmaster", "Alligator Alley",
             "Upper Goat Run", "Everglade", "Staircase", "JFK", "Ullr's Dream",
-            "Beaver Pond", "Andre's Paradise", "Kokomo", "Northwest Passage", "North Glade",
+            "Beaver Pond", "Andre's Paradise", "Kokomo", "Upper Northwest Passage", "North Glade",
             "Green Mountain Boys", "Upper Exhibition", "Expo Glade", "Racer",
             "Deer Run", "Bushwacker", "Harmony Lane", "Flyer Quad", "Metro Quad", "Aerial Tram",
             "Village Double", "Taxi Quad", "Bonaventure Quad", "Jet Triple"];
