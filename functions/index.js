@@ -78,7 +78,7 @@ jayDate.get('/jay-date', (req, res) => {
 jayStatusIno.get('/jay-ino', (req, res) => {
     getJayInfo(({ openTrails, closedTrails, groomedTrails, holdLift, closedLift, openLift, openPartialTrails }) => {
         let map = new Map();
-        const orderedList = ["Timbuktu", "Hotshot Derick", "Haynes", "U.N.",
+        const orderedList = ["Timbuktu", "Hotshot Derick", "Haynes", "Upper U.N.",
             "The Jet", "Kitzbuehel", "Montrealer", "Kitz Woods",
             "Hell's Woods", "Stateside Glade",  "Purgatory", "Hell's Crossing", "Paradise Meadows", "Angel's Wiggle",
             "Lower Milk Run", "Bonaventure Glade", "Show-Off Glade", "Doe Woods",
